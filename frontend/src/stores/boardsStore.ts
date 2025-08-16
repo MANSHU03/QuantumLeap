@@ -85,7 +85,8 @@ export const useBoardsStore = create<BoardsState & BoardsActions>((set, get) => 
 
     checkBackendAvailability: async () => {
         try {
-            await fetch('http://localhost:8080/actuator/health');
+            const healthUrl = `${import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '')}/actuator/health`;
+            await fetch(healthUrl);
             set({ isBackendAvailable: true });
         } catch (error) {
             set({ isBackendAvailable: false });

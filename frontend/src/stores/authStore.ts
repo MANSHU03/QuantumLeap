@@ -80,8 +80,9 @@ export const useAuthStore = create<AuthState & AuthActions>()(
 
             checkBackendAvailability: async () => {
                 try {
-                    // Use the correct backend health endpoint
-                    await fetch('http://localhost:8080/api/v1/actuator/health');
+                    // Use the correct backend health endpoint from env
+                    const healthUrl = `${import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '')}/actuator/health`;
+                    await fetch(healthUrl);
                     set({ isBackendAvailable: true });
                 } catch (error) {
                     set({ isBackendAvailable: false });
