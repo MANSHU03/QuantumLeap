@@ -51,9 +51,5 @@ src/
 .env.example             # Example environment config (do not commit real config)
 ```
 
-## 📚 Documentation
-- See `docs/API.md` for API details.
-- See root `README.md` for project overview.
-
 ## 🛡️ License
 This project is licensed under the MIT License.
