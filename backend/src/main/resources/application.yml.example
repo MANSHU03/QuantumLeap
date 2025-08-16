@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: quantumleap-backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/quantumleap
+    username: your_db_username
+    password: your_db_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+    prometheus:
+      enabled: true
+
+logging:
+  level:
+    com.quantumleap: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+quantumleap:
+  jwt:
+    secret: your_jwt_secret_key_here
+    expiration: 86400000 # 24 hours in ms
+  websocket:
+    max-sessions-per-board: 100
+    event-replay-chunk-size: 200
+
+# Instructions:
+# - Copy this file to 'application.yml' and fill in your real values.
+# - Never commit your real 'application.yml' to version control.

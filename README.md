@@ -3,30 +3,27 @@
 A modern, real-time collaborative whiteboard application built with Spring Boot 3.x backend and React + TypeScript frontend. Features include real-time drawing, cursor tracking, shape creation, and multi-user collaboration.
 
 ## 🚀 Features
-
-- **Real-time Collaboration**: Multiple users can draw simultaneously
-- **Live Cursor Tracking**: See other users' cursors in real-time
-- **Drawing Tools**: Pen, rectangle, circle, text, and eraser
-- **Public Whiteboards**: All whiteboards are public and accessible to everyone
-- **WebSocket Communication**: Real-time updates via WebSocket
-- **Event Sourcing**: All drawing events are persisted and replayable
-- **Responsive Design**: Modern UI with smooth interactions
+- Real-time Collaboration: Multiple users can draw simultaneously
+- Live Cursor Tracking: See other users' cursors in real-time
+- Drawing Tools: Pen, rectangle, circle, text, and eraser
+- Public Whiteboards: All whiteboards are public and accessible to everyone
+- WebSocket Communication: Real-time updates via WebSocket
+- Event Sourcing: All drawing events are persisted and replayable
+- Responsive Design: Modern UI with smooth interactions
 
 ## 🏗️ Architecture
-
-- **Backend**: Spring Boot 3.x with WebSocket support
-- **Frontend**: React 18 + TypeScript + Vite
-- **Database**: PostgreSQL with JPA/Hibernate
-- **Real-time**: WebSocket for live collaboration
-- **State Management**: Zustand for frontend state
-- **Canvas**: Konva.js for 2D drawing
+- Backend: Spring Boot 3.x with WebSocket support
+- Frontend: React 18 + TypeScript + Vite
+- Database: PostgreSQL with JPA/Hibernate
+- Real-time: WebSocket for live collaboration
+- State Management: Zustand for frontend state
+- Canvas: Konva.js for 2D drawing
 
 ## 📋 Prerequisites
-
-- **Java 21** (OpenJDK or Oracle JDK)
-- **Maven 3.8+**
-- **Node.js 18+** and **npm**
-- **PostgreSQL 15+**
+- Java 21 (OpenJDK or Oracle JDK)
+- Maven 3.8+
+- Node.js 18+ and npm
+- PostgreSQL 15+
 
 ## 🛠️ Quick Start
 
@@ -54,14 +51,18 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 \q
 ```
 
-### 3. Start Backend
+### 3. Configure Environment Variables
+- **Backend:** Copy `backend/src/main/resources/application.yml.example` to `application.yml` and fill in your real values. **Never commit your real `application.yml` to version control.**
+- **Frontend:** Copy `frontend/.env.example` to `.env` and fill in your real values. **Never commit your real `.env` to version control.**
+
+### 4. Start Backend
 ```bash
 cd backend
 ./mvnw spring-boot:run
 ```
 Backend will start on `http://localhost:8080`
 
-### 4. Start Frontend
+### 5. Start Frontend
 ```bash
 cd frontend
 npm install
@@ -69,35 +70,20 @@ npm run dev
 ```
 Frontend will start on `http://localhost:8081`
 
-### 5. Access the Application
-- **Frontend**: http://localhost:8081
-- **Backend API**: http://localhost:8080/api/v1
+### 6. Access the Application
+- **Frontend:** http://localhost:8081
+- **Backend API:** http://localhost:8080/api/v1
+
+## 🔐 Security & Best Practices
+- **Never commit real secrets or credentials.** Use example/template config files and environment variables.
+- Add `application.yml`, `.env`, and other sensitive files to `.gitignore`.
+- Use strong, unique secrets for JWT and database credentials in production.
 
 ## 🔧 Configuration
-
-### Backend Configuration
-The backend uses Spring Boot's default configuration. Key settings can be modified in `backend/src/main/resources/application.yml`:
-
-```yaml
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/quantumleap
-    username: your_username
-    password: your_password
-  jpa:
-    hibernate:
-      ddl-auto: update
-
-jwt:
-  secret: your-jwt-secret-key
-  expiration: 86400000
-```
-
-### Frontend Configuration
-The frontend uses Vite's proxy configuration. API calls are automatically proxied to the backend. Configuration can be modified in `frontend/vite.config.ts`.
+- **Backend:** See `backend/src/main/resources/application.yml.example` for configuration structure.
+- **Frontend:** See `frontend/.env.example` for environment variable structure.
 
 ## 📁 Project Structure
-
 ```
 QuantumLeap/
 ├── backend/                 # Spring Boot backend
@@ -111,7 +97,7 @@ QuantumLeap/
 │   │       ├── service/     # Business logic
 │   │       └── ws/          # WebSocket handlers
 │   └── src/main/resources/
-│       └── application.yml  # Application configuration
+│       └── application.yml.example  # Example application config
 ├── frontend/                # React frontend
 │   ├── src/
 │   │   ├── api/            # API client functions
@@ -119,54 +105,16 @@ QuantumLeap/
 │   │   ├── stores/         # Zustand state management
 │   │   └── main.tsx        # Application entry point
 │   ├── package.json
-│   └── vite.config.ts      # Vite configuration
+│   ├── vite.config.ts      # Vite configuration
+│   └── .env.example        # Example environment config
 └── README.md               # This file
 ```
 
-## 🌐 API Endpoints
+## 📚 Documentation
+- See `backend/README.md` and `frontend/README.md` for service-specific setup.
 
-### Authentication
-- `POST /api/v1/auth/register` - Register new user
-- `POST /api/v1/auth/login` - Login user
-
-### Whiteboards
-- `GET /api/v1/whiteboards` - Get all whiteboards
-- `POST /api/v1/whiteboards` - Create new whiteboard
-- `GET /api/v1/whiteboards/{id}` - Get whiteboard by ID
-- `DELETE /api/v1/whiteboards/{id}` - Delete whiteboard (owner only)
-
-### WebSocket
-- `ws://localhost:8080/ws/whiteboard/{boardId}` - Real-time collaboration
-
-## 🔒 Security
-
-- JWT-based authentication
-- All whiteboards are public (any user can access any whiteboard)
-- Only whiteboard owners can delete their whiteboards
-- WebSocket connections require valid JWT token
-
-## 🚀 Deployment
-
-### Backend Deployment
-1. Build the JAR: `./mvnw clean package`
-2. Run: `java -jar target/quantumleap-backend-1.0.0.jar`
-
-### Frontend Deployment
-1. Build: `npm run build`
-2. Serve the `dist` folder with any static file server
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📄 License
-
+## 🛡️ License
 This project is licensed under the MIT License.
 
-## 🆘 Support
-
+## 💬 Support
 For issues and questions, please create an issue in the repository.
